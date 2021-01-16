@@ -2,24 +2,27 @@ package com.company;
 
 public class Main {
 
+
     public static void main(String[] args) {
-        Human neznaika = new Human("Незнайка");
-        Human vintik = new Human("Винтик");
-        Human shpuntik = new Human("Шпунтик");
-        Human firstFriendNeznaika = new Human("Коротышка 1");
-        Human secondFriendNeznaika = new Human("Коротышка 2");
-        Human thirdFriendNeznaika = new Human("Коротышка 3");
-        firstFriendNeznaika.changeLocation("Земля");
-        secondFriendNeznaika.changeLocation("Земля");
-        thirdFriendNeznaika.changeLocation("Земля");
+        Human neznaika = new Human("Незнайка", "Не земля", 1);
+        Human vintik = new Human("Винтик", "Не земля", 3);
+        Human shpuntik = new Human("Шпунтик", "Не земля", 3);
+        Human firstFriendNeznaika = new Human("Коротышка 1", "Земля", 1);
+        Human secondFriendNeznaika = new Human("Коротышка 2", "Земля", 1);
+        Human thirdFriendNeznaika = new Human("Коротышка 3", "Земля", 1);
+
+
         System.out.println("\n\n");
-        neznaika.see(vintik, shpuntik, Human::enterOnTheEarth);
+
+
+        neznaika.see(a -> a.setLocation("Земля"), vintik, shpuntik);
         neznaika.worry();
-        neznaika.changeLocation("Земля");
-        neznaika.helpToWalk(vintik, shpuntik);
+        neznaika.setLocation("Земля");
+        vintik.helpToWalk(neznaika);
+        shpuntik.helpToWalk(neznaika);
         vintik.scaryAbout("отпустить Незнайку");
         shpuntik.scaryAbout("отпустить Незнайку");
-        neznaika.see(vintik, shpuntik, Human::scary);
+        neznaika.see(a -> a.addFeel(new Feel("Страх", Size.MEDIUM, 0)), vintik, shpuntik);
         neznaika.tryToFree(shpuntik, vintik);
         neznaika.tryToHit(shpuntik);
         shpuntik.free(neznaika);
@@ -77,8 +80,7 @@ public class Main {
         neznaika.addFriend(firstFriendNeznaika);
         neznaika.addFriend(secondFriendNeznaika);
         neznaika.addFriend(thirdFriendNeznaika);
-        neznaika.seeOnFriends(firstFriendNeznaika, secondFriendNeznaika, thirdFriendNeznaika);
+        neznaika.see(firstFriendNeznaika, secondFriendNeznaika, thirdFriendNeznaika);
         neznaika.laugh();
-
     }
 }
