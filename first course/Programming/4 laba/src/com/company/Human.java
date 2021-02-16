@@ -115,6 +115,7 @@ public class Human extends Being {
                 humans) {
             System.out.printf("%s ", human.getName());
         }
+        System.out.print("\n");
     }
 
     public void step(int a) {
@@ -209,7 +210,10 @@ public class Human extends Being {
 
     public void addFeel(Feel a) {
         humanFeels.add(a);
-        System.out.printf("%s чувство разрывает %s грудь\n", a.getSize(), getName());
+        if(a.getSize()==Size.VERYVERYHARD) {
+            System.out.printf("%s чувство разрывает %s грудь\n", a.getSize().getName(), getName());
+        }
+        System.out.printf("%s добавлено чувство %s\n",getName(),a.getDescription());
     }
 
     public void addFriend(Human a) {

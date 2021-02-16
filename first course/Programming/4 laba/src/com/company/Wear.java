@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Objects;
+
 abstract public class Wear {
     private String name;
     private PartOfBody partOfBody;
@@ -15,5 +17,26 @@ abstract public class Wear {
 
     public PartOfBody getLocation() {
         return partOfBody;
+    }
+
+    @Override
+    public String toString() {
+        return "Wear{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Wear wear = (Wear) o;
+        return Objects.equals(name, wear.name) &&
+                partOfBody == wear.partOfBody;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, partOfBody);
     }
 }

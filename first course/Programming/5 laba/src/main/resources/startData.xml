@@ -1,0 +1,8 @@
+<flats>
+    <flat name="fflat" area="11.1" numberOfRooms="4" price="100" balcony="true">
+        <coordinates x="6" y="5"/>
+        <Furnish furnish="DESIGNER"/>
+        <House name="" year="" numberOfFloors="" numberFlatsOnFloor="" numberOfLifts="" />
+    </flat>
+
+</flats>

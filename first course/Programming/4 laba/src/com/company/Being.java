@@ -37,7 +37,7 @@ public abstract class Being implements setAndGetName {
 
     public void setLocation(String location) {
         this.location = location;
-        System.out.printf("%s ступил на %s", name, location);
+        System.out.printf("%s ступил на %s\n", name, location);
     }
 }
 
