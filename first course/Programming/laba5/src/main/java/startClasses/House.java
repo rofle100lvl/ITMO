@@ -24,6 +24,7 @@ public class House {
     private Long numberOfLifts; //Значение поля должно быть больше 0
 
     public House() {
+
     }
 
     public House(String name, Long year, Integer numberOfFloors, int numberOfFlatsOnFloor, Long numberOfLifts) {
@@ -72,5 +73,16 @@ public class House {
 
     public void setNumberOfLifts(Long numberOfLifts) {
         this.numberOfLifts = numberOfLifts;
+    }
+
+    @Override
+    public String toString() {
+        return "House{" +
+                "name='" + name + '\'' +
+                ", year=" + year +
+                ", numberOfFloors=" + numberOfFloors +
+                ", numberOfFlatsOnFloor=" + numberOfFlatsOnFloor +
+                ", numberOfLifts=" + numberOfLifts +
+                '}';
     }
 }

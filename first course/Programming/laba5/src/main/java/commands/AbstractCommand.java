@@ -1,17 +1,37 @@
 package commands;
 
+import CollectionManager.Flats;
+import utils.UserAsker;
+
 /**
  * Abstract Command class contains Object methods, name and description.
  */
 public abstract class AbstractCommand implements Command {
     private String name;
     private String description;
+    protected UserAsker userAsker;
+    protected Flats flats;
 
     public AbstractCommand(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
+    public UserAsker getUserAsker() {
+        return userAsker;
+    }
+
+    public void setUserAsker(UserAsker userAsker) {
+        this.userAsker = userAsker;
+    }
+
+    public Flats getFlats() {
+        return flats;
+    }
+
+    public void setFlats(Flats flats) {
+        this.flats = flats;
+    }
 
     public String getName() {
         return name;

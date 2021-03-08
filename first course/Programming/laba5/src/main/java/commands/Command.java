@@ -8,5 +8,5 @@ import CollectionManager.Flats;
 public interface Command {
     String getDescription();
     String getName();
-    void execute(String argument, Flats flats);
+    boolean execute(String argument);
 }

@@ -2,18 +2,19 @@ package commands;
 
 import CollectionManager.Flats;
 import utils.Parser;
+import utils.UserAsker;
 
 public class SaveCommand extends AbstractCommand {
-    public SaveCommand() {
-        super("save", "Сохранение коллекции в файл");
-    }
+    public SaveCommand(UserAsker userAsker,Flats flats) {
 
-    public void get_info(Flats flats) {
-        flats.clear();
+        super("save", "Сохранение коллекции в файл");
+        setFlats(flats);
+        setUserAsker(userAsker);
     }
 
     @Override
-    public void execute(String argument,Flats flats) {
+    public boolean execute(String argument) {
         Parser.convertObjectToXml(flats, argument);
+        return true;
     }
 }

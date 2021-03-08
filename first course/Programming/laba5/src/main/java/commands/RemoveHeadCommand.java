@@ -1,18 +1,22 @@
 package commands;
 
 import CollectionManager.Flats;
+import utils.UserAsker;
 
 public class RemoveHeadCommand extends AbstractCommand {
-    public RemoveHeadCommand() {
-        super("head", "Вывод первого элемента коллекции");
-    }
+    public RemoveHeadCommand(UserAsker userAsker,Flats flats) {
 
-    public void get_info(Flats flats) {
-        flats.clear();
+        super("head", "Вывод первого элемента коллекции");
+        setUserAsker(userAsker);
+        setFlats(flats);
     }
 
     @Override
-    public void execute(String argument, Flats flats) {
-
+    public boolean execute(String argument) {
+        if (flats.getFlats().size() > 0) {
+            flats.head();
+            flats.getFlats().removeFirst();
+            return true;
+        } else return false;
     }
 }

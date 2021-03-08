@@ -165,6 +165,7 @@ public class Flat implements Comparable<Flat>{
         return id;
     }
 
+
     public Coordinates getCoordinates() {
         return coordinates;
     }
@@ -184,6 +185,11 @@ public class Flat implements Comparable<Flat>{
 
     public House getHouse() {
         return house;
+    }
+
+    public boolean greaterThan(Flat b){
+        if(price>b.getPrice())return true;
+        return false;
     }
 
     public String niceToString() {

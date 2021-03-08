@@ -2,18 +2,18 @@ package commands;
 
 import CollectionManager.Flats;
 import startClasses.Flat;
+import utils.UserAsker;
 
 public class HeadCommand extends AbstractCommand {
-    public HeadCommand() {
+    public HeadCommand(UserAsker userAsker,Flats flats) {
         super("head", "Вывод первого элемента коллекции");
-    }
-
-    public void get_info(Flats flats) {
-        flats.clear();
+        setUserAsker(userAsker);
+        setFlats(flats);
     }
 
     @Override
-    public void execute(String argument, Flats flats) {
+    public boolean execute(String argument) {
         flats.head();
+        return true;
     }
 }

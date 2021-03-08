@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,22 +10,39 @@ import commands.*;
 public class CommandManager {
     private final int COMMAND_HISTORY_SIZE = 8;
     private List<AbstractCommand> commands = new ArrayList<>();
-    private AddCommand addCommand = new AddCommand();
-    private InfoCommand infoCommand = new InfoCommand();
-    private ShowCommand showCommand = new ShowCommand();
-    private PrintUniquePriceCommand printUniquePrice = new PrintUniquePriceCommand();
-    private UpdateCommand updateCommand = new UpdateCommand();
-    private RemoveByIdCommand removeByIdCommand = new RemoveByIdCommand();
-    private ClearCommand clearCommand = new ClearCommand();
-    private SaveCommand saveCommand = new SaveCommand();
-    private ExitCommand exitCommand = new ExitCommand();
-    private AddIfMaxCommand addIfMaxCommand = new AddIfMaxCommand();
-    private HeadCommand headCommand = new HeadCommand();
-    private RemoveHeadCommand removeHeadCommand = new RemoveHeadCommand();
-    private FilterLessThanNumberOfRoomsCommand filterLessThanNumberOfRoomsCommand = new FilterLessThanNumberOfRoomsCommand();
-    private ExecuteScriptCommand executeScriptCommand = new ExecuteScriptCommand();
+    private AddCommand addCommand;
+    private InfoCommand infoCommand;
+    private ShowCommand showCommand;
+    private PrintUniquePriceCommand printUniquePrice;
+    private UpdateCommand updateCommand;
+    private RemoveByIdCommand removeByIdCommand;
+    private ClearCommand clearCommand;
+    private SaveCommand saveCommand ;
+    private ExitCommand exitCommand;
+    private AddIfMaxCommand addIfMaxCommand;
+    private HeadCommand headCommand;
+    private PrintFieldDescendingHouseCommand printFieldDescendingHouseCommand;
+    private RemoveHeadCommand removeHeadCommand;
+    private FilterLessThanNumberOfRoomsCommand filterLessThanNumberOfRoomsCommand;
+    private ExecuteScriptCommand executeScriptCommand;
 
-    public CommandManager(){
+    public CommandManager(UserAsker userAsker, Flats flats){
+        printFieldDescendingHouseCommand = new PrintFieldDescendingHouseCommand(userAsker, flats);
+        addCommand = new AddCommand(userAsker, flats);
+        infoCommand = new InfoCommand(userAsker,flats);
+        showCommand = new ShowCommand(userAsker,flats);
+        printUniquePrice = new PrintUniquePriceCommand(userAsker, flats);
+        updateCommand = new UpdateCommand(userAsker,flats);
+        removeByIdCommand = new RemoveByIdCommand(userAsker, flats);
+        clearCommand = new ClearCommand(userAsker, flats);
+        saveCommand = new SaveCommand(userAsker,flats);
+        exitCommand = new ExitCommand();
+        addIfMaxCommand = new AddIfMaxCommand(userAsker, flats);
+        headCommand = new HeadCommand(userAsker, flats);
+        removeHeadCommand = new RemoveHeadCommand(userAsker,flats);
+        filterLessThanNumberOfRoomsCommand = new FilterLessThanNumberOfRoomsCommand(userAsker,flats);
+        executeScriptCommand = new ExecuteScriptCommand();
+
         commands.add(addCommand);
         commands.add(executeScriptCommand);
         commands.add(printUniquePrice);
@@ -48,7 +66,9 @@ public class CommandManager {
         System.out.println("Команда '" + command + "' не найдена. Наберите 'help' для справки.");
         return false;
     }
-
+    public boolean printFieldDescendingHouse(String argument){
+        return printFieldDescendingHouseCommand.execute(argument);
+    }
 
     public void help() {
 
@@ -57,46 +77,47 @@ public class CommandManager {
             }
     }
     public boolean executeScript(String argument){
+
         return executeScriptCommand.findCycles(argument);
 
     }
-    public void info(String argument, Flats flats) {
-        infoCommand.execute(argument,flats);
+    public boolean info(String argument) {
+        return infoCommand.execute(argument);
     }
 
-    public void show(String argument, Flats flats) {
-        showCommand.execute(argument,flats);
-    }
-
-
-    public void add(String argument, Flats flats) {
-         addCommand.execute(argument,flats);
-    }
-
-    public void update(String argument, Flats flats) {
-         updateCommand.execute(argument,flats);
+    public boolean show(String argument) {
+        return showCommand.execute(argument);
     }
 
 
-    public void removeById(String argument, Flats flats) {
-        removeByIdCommand.execute(argument,flats);
-    }
-    public void printUniquePrice(String argument,Flats flats){
-        printUniquePrice.execute(argument,flats);
+    public boolean add(String arguments) {
+         return addCommand.execute(arguments);
     }
 
-    public void clear(String argument, Flats flats) {
-        clearCommand.execute(argument,flats);
+    public boolean update(String argument) {
+         return updateCommand.execute(argument);
     }
 
 
-    public void save(String argument, Flats flats){
-        saveCommand.execute(argument,flats);
+    public boolean removeById(String argument) {
+        return removeByIdCommand.execute(argument);
+    }
+    public boolean printUniquePrice(String argument){
+        return printUniquePrice.execute(argument);
+    }
+
+    public boolean clear(String argument) {
+        return clearCommand.execute(argument);
     }
 
 
-    public void exit(String argument, Flats flats) {
-         exitCommand.execute(argument,flats);
+    public boolean save(String argument){
+        return saveCommand.execute(argument);
+    }
+
+
+    public boolean exit(String argument) {
+         return exitCommand.execute(argument);
     }
 
 
@@ -105,22 +126,24 @@ public class CommandManager {
    // }
 
 
-    public void addIfMax(String argument, Flats flats) {
-        addIfMaxCommand.execute(argument,flats);
+    public boolean addIfMax(String argument) {
+       return addIfMaxCommand.execute(argument);
+    }
+
+    public boolean remove_head(String argument){
+        return removeHeadCommand.execute(argument);
+    }
+    public boolean head(String argument) {
+        return headCommand.execute(argument);
+    }
+
+    public boolean removeHead(String argument) {
+        return removeHeadCommand.execute(argument);
     }
 
 
-    public void head(String argument, Flats flats) {
-        headCommand.execute(argument, flats);
-    }
-
-    public void removeHead(String argument, Flats flats) {
-        removeHeadCommand.execute(argument, flats);
-    }
-
-
-    public void filterLessThanNumberOfRoomsCommand(String argument, Flats flats) {
-        filterLessThanNumberOfRoomsCommand.execute(argument, flats);
+    public boolean filterLessThanNumberOfRoomsCommand(String argument) {
+         return filterLessThanNumberOfRoomsCommand.execute(argument);
     }
 
     @Override

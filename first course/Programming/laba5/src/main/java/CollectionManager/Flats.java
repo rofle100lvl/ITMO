@@ -50,10 +50,10 @@ public class Flats {
         }
     }
 
-    public void clear() {
-
+    public boolean clear() {
+        if(flats.size()==0)return false;
         flats.clear();
-        System.out.println("Коллекция отчислена");
+        return true;
     }
 
     public void show() {

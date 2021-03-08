@@ -108,6 +108,7 @@ public class Validator {
             }
         }
         else if(field.getType().equals(String.class)){
+            if(value.equals("")) return false;
             try {
                 field.set(object, value);
             } catch (IllegalAccessException e) {
@@ -129,7 +130,7 @@ public class Validator {
             }
         }
         else if(field.getType().equals(Boolean.class)){
-            if( !(value.equals("true") || value.equals("false"))){
+            if(  value == null || !(value.equals("true") || value.equals("false"))){
                 return false;
             }
             try {
