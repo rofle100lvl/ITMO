@@ -1,2 +1,5 @@
-info
-exit
+add
+name
+pog
+1
+2

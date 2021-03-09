@@ -6,6 +6,9 @@ import utils.UserAsker;
 import javax.jws.soap.SOAPBinding;
 import java.util.HashSet;
 
+/**
+ * Класс команды, выводящей уникальные значения поля price всех элементов в коллекции
+ */
 public class PrintUniquePriceCommand extends AbstractCommand {
     public PrintUniquePriceCommand(UserAsker userAsker,Flats flats) {
         super("print_unique_price", "Выводит уникальные значения поля price всех элементов в коллекции");
@@ -13,7 +16,11 @@ public class PrintUniquePriceCommand extends AbstractCommand {
         setUserAsker(userAsker);
     }
 
-
+    /**
+     * Метод запускающий команду
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда обработана
+     */
     @Override
     public boolean execute(String argument) {
         HashSet<Integer> setOfPrice = new HashSet<Integer>();

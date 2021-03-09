@@ -1,6 +1,5 @@
 utils\ZonedDateTimeAdapter.class
 utils\UserAsker.class
-annotations\ShorterThan.class
 commands\ShowCommand.class
 commands\AddIfMaxCommand.class
 commands\HeadCommand.class
@@ -12,13 +11,12 @@ commands\AddCommand.class
 commands\RemoveByIdCommand.class
 utils\Validator.class
 commands\RemoveHeadCommand.class
-Main.class
 commands\InfoCommand.class
-annotations\LongerThan.class
 commands\Command.class
 commands\ExitCommand.class
 startClasses\Furnish.class
 commands\UpdateCommand.class
+utils\Menu.class
 utils\CommandManager.class
 commands\PrintUniquePriceCommand.class
 commands\FilterLessThanNumberOfRoomsCommand.class
@@ -28,8 +26,8 @@ annotations\GreaterThan.class
 commands\SaveCommand.class
 annotations\Between.class
 utils\Parser.class
+utils\Launch.class
 commands\AbstractCommand.class
 commands\PrintFieldDescendingHouseCommand.class
 startClasses\House.class
-Menu.class
 commands\ClearCommand.class

@@ -4,12 +4,25 @@ import CollectionManager.Flats;
 import utils.UserAsker;
 
 /**
- * Abstract Command class contains Object methods, name and description.
+ * Класс абстрактной команды содержит основные методы и поля любой команды
  */
 public abstract class AbstractCommand implements Command {
+
+    /**
+     * Имя команды
+     */
     private String name;
+    /**
+     * Описание команды
+     */
     private String description;
+    /**
+     * Объект для работы с потоками ввода
+     */
     protected UserAsker userAsker;
+    /**
+     * Объект, содержаший коллекцию
+     */
     protected Flats flats;
 
     public AbstractCommand(String name, String description) {

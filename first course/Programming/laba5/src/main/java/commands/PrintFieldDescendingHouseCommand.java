@@ -6,6 +6,10 @@ import utils.UserAsker;
 
 import java.sql.SQLOutput;
 
+/**
+ * Класс команды, выводящей значения поля house всех элементов в порядке убывания
+ */
+
 public class PrintFieldDescendingHouseCommand extends AbstractCommand {
     public PrintFieldDescendingHouseCommand(UserAsker userAsker, Flats flats) {
         super("print_field_descending_house", "Выводит значения поля house всех элементов в порядке убывания");
@@ -13,6 +17,11 @@ public class PrintFieldDescendingHouseCommand extends AbstractCommand {
         setFlats(flats);
     }
 
+    /**
+     * Метод запускающий команду
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда обработана
+     */
     @Override
     public boolean execute(String argument) {
         if(flats.getFlats().size()==0){

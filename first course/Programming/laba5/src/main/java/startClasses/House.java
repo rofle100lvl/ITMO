@@ -4,6 +4,10 @@ import annotations.GreaterThan;
 import annotations.NotNull;
 
 import javax.xml.bind.annotation.*;
+
+/**
+ * Начальный класс домов
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class House {
     @XmlElement

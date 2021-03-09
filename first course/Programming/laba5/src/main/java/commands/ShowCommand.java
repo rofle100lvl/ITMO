@@ -3,6 +3,10 @@ package commands;
 import CollectionManager.Flats;
 import utils.UserAsker;
 
+/**
+ * Класс команды, выводящей элементы коллекции
+ */
+
 public class ShowCommand extends AbstractCommand {
     public ShowCommand(UserAsker userAsker, Flats flats)
     {
@@ -11,10 +15,11 @@ public class ShowCommand extends AbstractCommand {
         setUserAsker(userAsker);
     }
 
-    public void get_info(Flats flats) {
-        flats.show();
-    }
-
+    /**
+     * Метод запускающий команду
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда обработана
+     */
     @Override
     public boolean execute(String argument) {
         flats.show();

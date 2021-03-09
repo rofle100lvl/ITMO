@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 
 /**
- * Asks a user a marine's value.
+ * Класс, содержащий сканер для считывания с потока
  */
 public class UserAsker {
     private BufferedReader userScanner;
@@ -16,6 +16,15 @@ public class UserAsker {
         this.userScanner = userScanner;
         fileMode = false;
     }
+
+    public boolean isFileMode() {
+        return fileMode;
+    }
+
+    public void setFileMode(boolean fileMode) {
+        this.fileMode = fileMode;
+    }
+
     public void setUserScanner(BufferedReader userScanner) {
         this.userScanner = userScanner;
     }
@@ -23,15 +32,6 @@ public class UserAsker {
     public BufferedReader getUserScanner() {
         return userScanner;
     }
-
-    public void setFileMode() {
-        fileMode = true;
-    }
-
-    public void setUserMode() {
-        fileMode = false;
-    }
-
 
     @Override
     public String toString() {

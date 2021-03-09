@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Класс для успешного маршаллинга даты создания переменной
+ */
 public class ZonedDateTimeAdapter extends XmlAdapter<String, ZonedDateTime> {
 
     private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

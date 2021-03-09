@@ -19,7 +19,7 @@
                     <manifest>
                         <addClasspath>true</addClasspath>
                         <classpathPrefix>lib/</classpathPrefix>
-                        <mainClass>Main</mainClass>
+                        <mainClass>utils.Launch</mainClass>
                     </manifest>
                 </archive>
             </configuration>

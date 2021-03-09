@@ -6,6 +6,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+/**
+ * Начальный класс координат
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Coordinates {
     @XmlElement

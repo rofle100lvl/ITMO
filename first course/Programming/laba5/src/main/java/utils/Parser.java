@@ -1,15 +1,16 @@
 package utils;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import CollectionManager.Flats;
 import startClasses.*;
+
+/**
+ * Класс для преобразование xml файла в коллекцию
+ */
 public class Parser {
 
     private final static ArrayList<Class> wrapperClasses = new ArrayList<>(Arrays.asList(new Class[]{
@@ -22,7 +23,12 @@ public class Parser {
             Boolean.class,
             Character.class
     }));
-    // восстанавливаем объект из XML файла
+
+    /**
+     * Метод создающий коллекцию объектов из xml файла
+     * @param filePath Путь к файлу
+     * @return Класс, содержащий коллекцию элементов
+     */
     public static Flats fromXmlToObject(String filePath) {
         try {
             // создаем объект JAXBContext - точку входа для JAXB
@@ -32,18 +38,22 @@ public class Parser {
             for(int i=0;i<flats.getFlats().size();i++){
                 Validator validator = new Validator(Flat.class);
                 if(!validator.validate(flats.getFlats().get(i))){
-                    System.out.printf("В %d квартире найдена ошибка в файле. в файле startData.xml введны некорректные данные\n",i);
+                    System.out.printf("В %d квартире найдена ошибка в файле. В файле startData.xml введны некорректные данные.\n",i+1);
                     flats.removeId((long) i);
                 }
             }
             return flats;
         } catch (JAXBException | IllegalAccessException e) {
-            e.printStackTrace();
+            System.out.println("Стартовый файл не найден или нарушены права доступа");
         }
         return null;
     }
 
-    // сохраняем объект в XML файл
+    /**
+     * Метод преобразовывающий коллекция в xml файл
+     * @param flats Класс, содержащий коллекцию
+     * @param filePath Путь к файлу
+     */
     public static void convertObjectToXml(Flats flats, String filePath) {
         try {
             JAXBContext context = JAXBContext.newInstance(Flats.class, Flat.class, Coordinates.class);
@@ -57,6 +67,11 @@ public class Parser {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Метод возвращаюший все примитивные и ссылочные типы, используемые в классе
+     * @return Массив классов полей класса Flat
+     */
     public static ArrayList<Class> getWrapperClasses(){
         return wrapperClasses;
     }

@@ -9,7 +9,9 @@ import utils.Validator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
+/**
+ * Класс команды добавления экземпляра в коллекцию, если он максимальный
+ */
 public class AddIfMaxCommand extends AbstractCommand {
     public AddIfMaxCommand(UserAsker userAsker,Flats flats) {
         super("add_if_max", "Добавляет новый элемент в коллекцию");
@@ -17,6 +19,11 @@ public class AddIfMaxCommand extends AbstractCommand {
         setFlats(flats);
     }
 
+    /**
+     * Метод запускающий команду
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда обработана
+     */
     @Override
     public boolean execute(String argument) {
         BufferedReader reader;

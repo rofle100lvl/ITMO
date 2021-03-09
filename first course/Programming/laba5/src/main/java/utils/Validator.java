@@ -9,23 +9,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Класс, служащий для валидации всех полей класса
+ */
 public class Validator {
     private final Class clazz;
-    private final static ArrayList<Class> wrapperClasses = new ArrayList<>(Arrays.asList(new Class[]{
-            Byte.class,
-            Short.class,
-            Integer.class,
-            Long.class,
-            Float.class,
-            Double.class,
-            Boolean.class,
-            Character.class
-    }));
 
     public Validator(Class clazz) {
         this.clazz = clazz;
     }
 
+    /**
+     * Метод приводящий к ссылочному типу примитивы
+     * @param object Проверяемый объект
+     * @param type Класс проверяемого объекта
+     * @return Приведённый к ссылочному типу объект
+     */
     private Number objToNumber(Object object, Class type) {
         if (type.equals(byte.class) || type.equals(Byte.class)) {
             return (Byte) object;
@@ -41,9 +40,15 @@ public class Validator {
             return (Double) object;
         }
 
-        return null; //TODO:исправить
+        return null;
     }
 
+    /**
+     * Метод проверяющий соответствие полей ограничениям, наложенным на них
+     * @param object Проверяемый объект
+     * @return Возвращает true, если все поля соответствует ограничеям
+     * @throws IllegalAccessException
+     * */
     public boolean validate(Object object) throws IllegalAccessException {
         if (clazz.isInstance(object)) {
             for (Field field :
@@ -74,16 +79,6 @@ public class Validator {
                 } catch (NullPointerException | IllegalAccessException ignored) { /* У поля нет этой аннотации */ }
 
                 try {
-                    LongerThan annotation = field.getDeclaredAnnotation(LongerThan.class);
-                    if (field.get(object).toString().length() < annotation.length()) return false;
-                } catch (NullPointerException | IllegalAccessException ignored) { /* У поля нет этой аннотации */ }
-
-                try {
-                    ShorterThan annotation = field.getDeclaredAnnotation(ShorterThan.class);
-                    if (field.get(object).toString().length() > annotation. length()) return false;
-                } catch (NullPointerException | IllegalAccessException ignored) { /* У поля нет этой аннотации */ }
-
-                try {
                     NotEqualString annotation = field.getDeclaredAnnotation(NotEqualString.class);
                     if (field.get(object).toString().equals(annotation.string())) return false;
                 } catch (NullPointerException | IllegalAccessException ignored) { /* У поля нет этой аннотации */ }
@@ -98,6 +93,13 @@ public class Validator {
         return true;
     }
 
+    /**
+     * Метод, проверяющий поле, проверяющий строку на ограничения для определённого поля
+     * @param value Исходная строка
+     * @param field Поле, для которого происходит проверка
+     * @param object Объект, поле которого мы исследуем
+     * @return Возвращает true, если валидация прошла успешно
+     */
     public boolean validateField(String value, Field field, Object object){
         field.setAccessible(true);
         if(field.getType().equals(Float.class) || field.getType().equals(float.class)) {
@@ -157,16 +159,6 @@ public class Validator {
         try {
             GreaterThan annotation = field.getDeclaredAnnotation(GreaterThan.class);
             if (objToNumber(field.get(object), field.getType()).doubleValue() < annotation.num()) return false;
-        } catch (NullPointerException | IllegalAccessException ignored) { /* У поля нет этой аннотации */ }
-
-        try {
-            LongerThan annotation = field.getDeclaredAnnotation(LongerThan.class);
-            if (field.get(object).toString().length() < annotation.length()) return false;
-        } catch (NullPointerException | IllegalAccessException ignored) { /* У поля нет этой аннотации */ }
-
-        try {
-            ShorterThan annotation = field.getDeclaredAnnotation(ShorterThan.class);
-            if (field.get(object).toString().length() > annotation. length()) return false;
         } catch (NullPointerException | IllegalAccessException ignored) { /* У поля нет этой аннотации */ }
 
         try {

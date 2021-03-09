@@ -2,7 +2,9 @@ package commands;
 
 import CollectionManager.Flats;
 import utils.UserAsker;
-
+/**
+ * Класс команды вывода всех квартир, значение поля numberOfRooms которых меньше заданного
+ */
 public class FilterLessThanNumberOfRoomsCommand extends AbstractCommand {
     public FilterLessThanNumberOfRoomsCommand(UserAsker userAsker,Flats flats) {
         super("filter_less_than_number_of_rooms", "Выводит элементы, значение поля numberOfRooms которых меньше заданного");
@@ -10,6 +12,11 @@ public class FilterLessThanNumberOfRoomsCommand extends AbstractCommand {
         setUserAsker(userAsker);
     }
 
+    /**
+     * Метод запускающий команду
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда обработана
+     */
 
     @Override
     public boolean execute(String argument) {

@@ -1,3 +1,5 @@
+package utils;
+
 import startClasses.Coordinates;
 import startClasses.House;
 import utils.CommandManager;
@@ -16,6 +18,9 @@ import startClasses.Flat;
 import utils.UserAsker;
 import utils.Validator;
 
+/**
+ * Класс Menu используется для обработки запросов пользователя
+ */
 public class Menu {
 
     private static String inputFile = System.getenv("nameOfFile");
@@ -26,8 +31,14 @@ public class Menu {
 
     Stack<String>scriptStack = new Stack<>();
 
+    /**
+     * Конструктор
+     */
     public Menu() {
         flats = Parser.fromXmlToObject(inputFile);
+        if(flats == null){
+            flats = new Flats();
+        }
         flats.sort();
         userAsker = new UserAsker(reader);
         commandManager = new CommandManager(userAsker,flats);
@@ -38,6 +49,12 @@ public class Menu {
 
     CommandManager commandManager;
 
+    /**
+     * Метод для проверки колличества аргументов передаваемых пользователем
+     * @param type - колличество параметров. Значение -1, соответствует произвольному числу параметров
+     * @param arguments - исходный запрос пользователя.
+     * @return - возвращает true, если проврка ушла успешно и false в обратном случае
+     */
     public boolean validateCountArgs(int type, String arguments) {
         String[] words_request;
         words_request = arguments.split(" ");
@@ -55,8 +72,11 @@ public class Menu {
 
     }
 
-
-
+    /**
+     * Основной метод обрабатывающий запросы пользователя
+     * @param stream Поток, с которого будет происходить считывание запросов
+     * @return Возвращает true, если работа завершена успешно
+     */
     public Boolean work(InputStream stream) {
         String[] words_request;
         String request= "";
@@ -69,9 +89,9 @@ public class Menu {
 
             }
             try {
-                words_request = request.split(" ");
+                words_request = request.trim().split(" ");
             }catch(NullPointerException e){
-                return false;
+                return true;
             }
             switch (words_request[0]) {
                 case "help":{
@@ -116,24 +136,27 @@ public class Menu {
                     break;
                 }
                 case "execute_script": {
-
-                    if(!validateCountArgs(1,request)){
-                        break;
-                    }
-                    if (!commandManager.executeScript( words_request[1])) {
-
-                        break;
-                    }
-                    System.out.println("====  Начало выполнения скрипта по адресу " + words_request[1] + "  ====");
+                        if (!validateCountArgs(1, request)) {
+                            break;
+                        }
+                        if (!commandManager.executeScript(words_request[1])) {
+                            break;
+                        }
+                        System.out.println("====  Начало выполнения скрипта по адресу " + words_request[1] + "  ====");
                     try {
                         if(!work(new BufferedInputStream(new FileInputStream( words_request[1])))){
+                            reader = new BufferedReader(new InputStreamReader(stream));
+                            userAsker.setUserScanner(reader);
                             System.out.println("В одном из файлов обнаружена ошибка. Перепроверьте скрипты.");
+                            if(stream.equals(System.in))break;
                             return false;
                         }
                     } catch (FileNotFoundException e) {
                         System.out.println("Файл не найден или нарушены права доступа");
                     }
                     System.out.println("====  Скрипт " + words_request[1] + " успешно выполнен  ====\n");
+                    reader = new BufferedReader(new InputStreamReader(stream));
+                    userAsker.setUserScanner(reader);
                     break;
                 }
 

@@ -12,6 +12,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 
+/**
+ * Класс команды, обновляещей значение элемента коллекции, id которого равен заданному
+ */
+
 public class UpdateCommand extends AbstractCommand {
     public UpdateCommand(UserAsker userAsker, Flats flats) {
         super("update", "Обновляет значение элемента коллекции, id которого равен заданному");
@@ -19,6 +23,11 @@ public class UpdateCommand extends AbstractCommand {
         setUserAsker(userAsker);
     }
 
+    /**
+     * Метод запускающий команду
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда обработана
+     */
     @Override
     public boolean execute(String argument) {
        String [] wordsRequest=argument.split(" ");

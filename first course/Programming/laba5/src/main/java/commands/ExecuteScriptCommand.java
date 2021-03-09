@@ -5,8 +5,11 @@ import CollectionManager.Flats;
 import java.io.*;
 import java.util.Stack;
 
+/**
+ * Класс команды выполнения скрипта
+ */
+
 public class ExecuteScriptCommand extends AbstractCommand {
-    private static String toResources = "src" + File.separator + "main" + File.separator + "resources" + File.separator;
     public ExecuteScriptCommand() {
         super("execute_script", "Очистка коллекции");
     }
@@ -23,7 +26,7 @@ public class ExecuteScriptCommand extends AbstractCommand {
             String line = new String("");
             while ((line = reader.readLine()) != null) {
                 if(line.split(" ").length==2 && line.split(" ")[0].equals("execute_script")){
-                    T &= findCycles(toResources + line.split(" ")[1]);
+                    T &= findCycles(line.split(" ")[1]);
                 }
             }
             stackOpenScripts.pop();
@@ -40,7 +43,11 @@ public class ExecuteScriptCommand extends AbstractCommand {
             return true;
         }
     }
-
+    /**
+     * Метод запускающий команду
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда обработана
+     */
     @Override
     public boolean execute(String argument) {
         return findCycles(argument);

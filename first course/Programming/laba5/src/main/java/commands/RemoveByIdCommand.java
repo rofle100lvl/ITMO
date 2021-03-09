@@ -3,6 +3,9 @@ package commands;
 import CollectionManager.Flats;
 import utils.UserAsker;
 
+/**
+ * Класс команды, удаляющей элемент с заданным id
+ */
 public class RemoveByIdCommand extends AbstractCommand {
     public RemoveByIdCommand(UserAsker userAsker,Flats flats) {
         super("remove_by_id", "Удаляет элемент с заданным id");
@@ -10,6 +13,11 @@ public class RemoveByIdCommand extends AbstractCommand {
         setUserAsker(userAsker);
     }
 
+    /**
+     * Метод запускающий команду
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда обработана
+     */
     @Override
     public boolean execute(String argument) {
         String []wordsRequest = argument.split(" ");

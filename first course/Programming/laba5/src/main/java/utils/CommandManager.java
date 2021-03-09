@@ -7,6 +7,9 @@ import java.util.List;
 import CollectionManager.Flats;
 import commands.*;
 
+/**
+ * Класс CommandManager используется для работы с камандами
+ */
 public class CommandManager {
     private final int COMMAND_HISTORY_SIZE = 8;
     private List<AbstractCommand> commands = new ArrayList<>();
@@ -26,6 +29,11 @@ public class CommandManager {
     private FilterLessThanNumberOfRoomsCommand filterLessThanNumberOfRoomsCommand;
     private ExecuteScriptCommand executeScriptCommand;
 
+    /**
+     * Конструктор класса
+     * @param userAsker
+     * @param flats
+     */
     public CommandManager(UserAsker userAsker, Flats flats){
         printFieldDescendingHouseCommand = new PrintFieldDescendingHouseCommand(userAsker, flats);
         addCommand = new AddCommand(userAsker, flats);
@@ -58,94 +66,158 @@ public class CommandManager {
         commands.add(filterLessThanNumberOfRoomsCommand);
     }
 
+    /**
+     * Метод возвращающий список команд
+     * @return Возвращает список команд
+     */
     public List<AbstractCommand> getCommands() {
         return commands;
     }
 
-    public boolean noSuchCommand(String command) {
-        System.out.println("Команда '" + command + "' не найдена. Наберите 'help' для справки.");
-        return false;
-    }
+    /**
+     * Вызывает команду FieldDescendingHouse
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
     public boolean printFieldDescendingHouse(String argument){
         return printFieldDescendingHouseCommand.execute(argument);
     }
-
+    /**
+     * Выводит на экран список всех доступных команд
+     */
     public void help() {
 
             for (Command command : commands) {
                 System.out.println(command.getName() + " - " +  command.getDescription());
             }
     }
+
+    /**
+     * Вызывает команду ExecuteScript
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
     public boolean executeScript(String argument){
 
         return executeScriptCommand.findCycles(argument);
 
     }
+    /**
+     * Вызывает команду Info
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
     public boolean info(String argument) {
         return infoCommand.execute(argument);
     }
-
+    /**
+     * Вызывает команду Show
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
     public boolean show(String argument) {
         return showCommand.execute(argument);
     }
 
-
-    public boolean add(String arguments) {
-         return addCommand.execute(arguments);
+    /**
+     * Вызывает команду Add
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
+    public boolean add(String argument) {
+         return addCommand.execute(argument);
     }
 
+    /**
+     * Вызывает команду Update
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
     public boolean update(String argument) {
          return updateCommand.execute(argument);
     }
 
-
+    /**
+     * Вызывает команду RemoveById
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
     public boolean removeById(String argument) {
         return removeByIdCommand.execute(argument);
     }
+
+    /**
+     * Вызывает команду PrintUniquePrice
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
+
     public boolean printUniquePrice(String argument){
         return printUniquePrice.execute(argument);
     }
+
+    /**
+     * Вызывает команду Clear
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
 
     public boolean clear(String argument) {
         return clearCommand.execute(argument);
     }
 
+    /**
+     * Вызывает команду Save
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
 
     public boolean save(String argument){
         return saveCommand.execute(argument);
     }
 
-
-    public boolean exit(String argument) {
-         return exitCommand.execute(argument);
-    }
-
-
-   // public boolean executeScript(String argument) {
-    //    return executeScriptCommand.execute(argument);
-   // }
-
+    /**
+     * Вызывает команду AddIfMax
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
 
     public boolean addIfMax(String argument) {
        return addIfMaxCommand.execute(argument);
     }
 
+    /**
+     * Вызывает команду RemoveHead
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
+
     public boolean remove_head(String argument){
         return removeHeadCommand.execute(argument);
     }
+    /**
+     * Вызывает команду Head
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
     public boolean head(String argument) {
         return headCommand.execute(argument);
     }
 
-    public boolean removeHead(String argument) {
-        return removeHeadCommand.execute(argument);
-    }
-
+    /**
+     * Вызывает команду FilterLessThanNumberOfRooms
+     * @param argument Запрос пользователя
+     * @return Возвращает true, если команда выполнена удачно
+     */
 
     public boolean filterLessThanNumberOfRoomsCommand(String argument) {
          return filterLessThanNumberOfRoomsCommand.execute(argument);
     }
 
+    /**
+     * Выводит информацию о классе
+     * @return Возвращает строку информации о классе
+     */
     @Override
     public String toString() {
         return "CommandManager - класс для работы с коммандами.";
