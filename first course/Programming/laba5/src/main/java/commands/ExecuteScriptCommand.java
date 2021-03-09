@@ -27,6 +27,9 @@ public class ExecuteScriptCommand extends AbstractCommand {
                 }
             }
             stackOpenScripts.pop();
+            if(!T){
+                System.out.println("#############################################\nОшибка! Один или несколько скриптов зациклены.\n#############################################");
+            }
             return T;
 
         } catch (FileNotFoundException e) {
@@ -34,7 +37,7 @@ public class ExecuteScriptCommand extends AbstractCommand {
             return false;
 
         } catch (IOException e) {
-            return false;
+            return true;
         }
     }
 

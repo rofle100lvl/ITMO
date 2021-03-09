@@ -18,9 +18,8 @@ import utils.Validator;
 
 public class Menu {
 
-    private static String inputFile = "src" + File.separator + "main" + File.separator + "resources" + File.separator + System.getenv("nameOfFile");
-    private static String outputFile = "src" + File.separator + "main" + File.separator + "resources" + File.separator + "outputData.xml";
-    private static String toResources = "src" + File.separator + "main" + File.separator + "resources" + File.separator;
+    private static String inputFile = System.getenv("nameOfFile");
+    private static String outputFile = "outputData.xml";
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private Flats flats;
     UserAsker userAsker;
@@ -32,6 +31,7 @@ public class Menu {
         flats.sort();
         userAsker = new UserAsker(reader);
         commandManager = new CommandManager(userAsker,flats);
+        System.out.println("***\tНачало работы. Для просмотра доступных команд напишите 'help'\t***");
         work(System.in);
 
     }
@@ -120,13 +120,13 @@ public class Menu {
                     if(!validateCountArgs(1,request)){
                         break;
                     }
-                    if (!commandManager.executeScript(toResources + words_request[1])) {
-                        System.out.println("#############################################\nОшибка! Один или несколько скриптов зациклены.\n#############################################");
+                    if (!commandManager.executeScript( words_request[1])) {
+
                         break;
                     }
                     System.out.println("====  Начало выполнения скрипта по адресу " + words_request[1] + "  ====");
                     try {
-                        if(!work(new BufferedInputStream(new FileInputStream(toResources + words_request[1])))){
+                        if(!work(new BufferedInputStream(new FileInputStream( words_request[1])))){
                             System.out.println("В одном из файлов обнаружена ошибка. Перепроверьте скрипты.");
                             return false;
                         }
@@ -160,11 +160,12 @@ public class Menu {
                 }
 
                 case "add": {
-                    if (validateCountArgs(0, request))
-                    if(!commandManager.add(request)){
-                        return false;
+                    if (validateCountArgs(0, request)) {
+                        if (!commandManager.add(request)) {
+                            return false;
+                        }
+                        System.out.println("Элемент успешно добавлен");
                     }
-                    System.out.println("Элемент успешно добавлен");
                     break;
                 }
 
@@ -190,5 +191,5 @@ public class Menu {
             }
         }
     }
-    
+
 }
