@@ -84,11 +84,12 @@ public class Menu {
         userAsker.setUserScanner(reader);
         while (true) {
             try {
-                request = reader.readLine();
+                    request = reader.readLine();
             } catch (IOException ignored) {
 
             }
             try {
+                request = request.trim();
                 words_request = request.trim().split(" ");
             }catch(NullPointerException e){
                 return true;
@@ -148,7 +149,11 @@ public class Menu {
                             reader = new BufferedReader(new InputStreamReader(stream));
                             userAsker.setUserScanner(reader);
                             System.out.println("В одном из файлов обнаружена ошибка. Перепроверьте скрипты.");
-                            if(stream.equals(System.in))break;
+                            if(stream.equals(System.in)){
+                                reader = new BufferedReader(new InputStreamReader(stream));
+                                userAsker.setUserScanner(reader);
+                                break;
+                            }
                             return false;
                         }
                     } catch (FileNotFoundException e) {

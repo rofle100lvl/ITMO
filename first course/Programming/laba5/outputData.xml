@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Flats>
+    <creationCollectionDate>2021-03-11 14:07:41</creationCollectionDate>
+    <flat>
+        <name>Pork</name>
+        <coordinates>
+            <x>1.0</x>
+            <y>1.0</y>
+        </coordinates>
+        <area>5.6</area>
+        <numberOfRooms>5</numberOfRooms>
+        <price>6</price>
+        <balcony>true</balcony>
+        <furnish>NONE</furnish>
+        <house>
+            <name>key</name>
+            <year>1997</year>
+            <numberOfFloors>9</numberOfFloors>
+            <numberOfFlatsOnFloor>5</numberOfFlatsOnFloor>
+            <numberOfLifts>2</numberOfLifts>
+        </house>
+        <creationElementDate>2021-03-11 14:07:41</creationElementDate>
+    </flat>
+    <flat>
+        <name>Curn</name>
+        <coordinates>
+            <x>3.0</x>
+            <y>4.0</y>
+        </coordinates>
+        <area>5.6</area>
+        <numberOfRooms>5</numberOfRooms>
+        <price>7</price>
+        <balcony>true</balcony>
+        <furnish>NONE</furnish>
+        <house>
+            <name>key</name>
+            <year>1997</year>
+            <numberOfFloors>9</numberOfFloors>
+            <numberOfFlatsOnFloor>5</numberOfFlatsOnFloor>
+            <numberOfLifts>2</numberOfLifts>
+        </house>
+        <creationElementDate>2021-03-11 14:07:41</creationElementDate>
+    </flat>
+    <flat>
+        <name>1</name>
+        <coordinates>
+            <x>21.0</x>
+            <y>21.0</y>
+        </coordinates>
+        <area>12.0</area>
+        <numberOfRooms>15</numberOfRooms>
+        <price>12</price>
+        <balcony>true</balcony>
+        <furnish>LITTLE</furnish>
+        <house>
+            <name>Kor</name>
+            <year>12</year>
+            <numberOfFloors>23</numberOfFloors>
+            <numberOfFlatsOnFloor>4</numberOfFlatsOnFloor>
+            <numberOfLifts>21</numberOfLifts>
+        </house>
+        <creationElementDate>2021-03-11 14:07:56</creationElementDate>
+    </flat>
+</Flats>
