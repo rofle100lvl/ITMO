@@ -23,6 +23,10 @@ public class PrintUniquePriceCommand extends AbstractCommand {
      */
     @Override
     public boolean execute(String argument) {
+        if(flats.getFlats().size()==0){
+            System.out.println("Коллекция пуста");
+            return true;
+        }
         HashSet<Integer> setOfPrice = new HashSet<Integer>();
         for(int i=0;i<flats.getFlats().size();i++){
             setOfPrice.add(flats.getFlats().get(i).getPrice());

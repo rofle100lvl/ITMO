@@ -1,22 +1,9 @@
 package utils;
 
-import startClasses.Coordinates;
-import startClasses.House;
-import utils.CommandManager;
-import utils.Parser;
-
 import java.io.*;
-import java.lang.reflect.Field;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.SQLOutput;
 import java.util.*;
-import java.util.stream.Stream;
 
 import CollectionManager.Flats;
-import startClasses.Flat;
-import utils.UserAsker;
-import utils.Validator;
 
 /**
  * Класс Menu используется для обработки запросов пользователя
@@ -31,16 +18,49 @@ public class Menu {
 
     Stack<String>scriptStack = new Stack<>();
 
+    private void validateStartFile(){
+        if(inputFile==null || inputFile.isEmpty()) {
+            System.out.println("Переменной окружения не существует.");
+            askNewInputFile();
+            return;
+        }
+        File newInputFile = new File(inputFile);
+        if(!newInputFile.exists()) {
+            System.out.println("Файл отсутсвует по указанному пути.");
+            askNewInputFile();
+            return;
+        }
+        if(!newInputFile.canRead()){
+            System.out.println("Файл не имеет прав на чтение.");
+            askNewInputFile();
+        }
+    }
+
+    private void askNewInputFile(){
+        while(true) {
+            System.out.println("Введите путь к стартовому файлу:");
+            try {
+                inputFile = reader.readLine();
+            } catch (IOException e) {
+                System.out.println("Операция ввода-вывода завершилась неудачно или была прервана");
+            }
+            File newInputFile = new File(inputFile);
+            if (newInputFile.exists() && newInputFile.canRead())break;
+            else System.out.println("Введённый файл не существует или у него отсутствуют права на чтение.");
+        }
+    }
+
     /**
      * Конструктор
      */
     public Menu() {
+        userAsker = new UserAsker(reader);
+        validateStartFile();
         flats = Parser.fromXmlToObject(inputFile);
         if(flats == null){
             flats = new Flats();
         }
         flats.sort();
-        userAsker = new UserAsker(reader);
         commandManager = new CommandManager(userAsker,flats);
         System.out.println("***\tНачало работы. Для просмотра доступных команд напишите 'help'\t***");
         work(System.in);

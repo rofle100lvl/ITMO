@@ -21,6 +21,10 @@ public class FilterLessThanNumberOfRoomsCommand extends AbstractCommand {
     @Override
     public boolean execute(String argument) {
         String[] wordsRequest = argument.split(" ");
+        if(flats.getFlats().size()==0){
+            System.out.println("Коллекция пуста.");
+            return true;
+        }
         try {
             Long numberOfRooms = Long.parseLong(wordsRequest[1]);
             for(int i=0;i<flats.getFlats().size();i++){
